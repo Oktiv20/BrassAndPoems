@@ -118,7 +118,7 @@ void DisplayAllProducts(List<Product> products, List<ProductType> productTypes)
     };
 }
 
-/*void DeleteProduct(List<Product> products, List<ProductType> productTypes)
+void DeleteProduct(List<Product> products, List<ProductType> productTypes)
 {
     Console.WriteLine("Delete a product:");
 
@@ -155,7 +155,7 @@ void DisplayAllProducts(List<Product> products, List<ProductType> productTypes)
     products.Remove(DeleteProduct);
 
     Console.WriteLine($"You've removed {DeleteProduct.Name}");
-}*/
+}
 
 void AddProduct(List<Product> products, List<ProductType> productTypes)
 {
