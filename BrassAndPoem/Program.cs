@@ -1,6 +1,7 @@
 ﻿
 //create a "products" variable here to include at least five Product instances. Give them appropriate ProductTypeIds.
 
+using System.Net.WebSockets;
 using System.Threading.Channels;
 
 List<Product> products = new List<Product>()
@@ -77,7 +78,7 @@ void App()
                     DeleteProduct(products, productTypes);
                     break;
                 case 3:
-                    // AddProduct();
+                    AddProduct(products, productTypes);
                     break;
                 case 4:
                     // UpdateProduct();
@@ -113,7 +114,7 @@ void DisplayAllProducts(List<Product> products, List<ProductType> productTypes)
     for (int i = 0; i < products.Count; i++)
     {
         Product product = products[i];
-        ProductType productType = productTypes.FirstOrDefault(p => p.Id == product.ProductTypeId);
+        ProductType productType = productTypes.FirstOrDefault(prodType => prodType.Id == product.ProductTypeId);
         Console.WriteLine($"{i + 1}. Title: {productType.Title} \t Price: {product.Price:C} \t Product Name: {product.Name}");
     };
 }
@@ -159,7 +160,41 @@ void DeleteProduct(List<Product> products, List<ProductType> productTypes)
 
 void AddProduct(List<Product> products, List<ProductType> productTypes)
 {
-    throw new NotImplementedException();
+    Console.WriteLine("Add a new product");
+    Console.WriteLine("Enter the name of the product:");
+    string? newProductName = Console.ReadLine();
+    if (string.IsNullOrEmpty(newProductName))
+    {
+        Console.WriteLine("This field is required. Please enter a name.");
+    }
+
+    Console.WriteLine("Enter the price of the product:");
+    if (!decimal.TryParse(Console.ReadLine(), out decimal newProductPice))
+    {
+        Console.WriteLine("This field is required. Please enter a price.");
+    }
+
+    Console.WriteLine("Please choose one of the given numbers for the Product Type:");
+    for (int i = 0; i < productTypes.Count; i++)
+    {
+        Console.WriteLine($"{i + 1}. Product Id {productTypes[i].Id}: {productTypes[i].Title}");
+    }
+
+    if (!Int32.TryParse(Console.ReadLine(), out int AddedProductType))
+    {
+        Console.WriteLine("Incorrect product type. Please choose from the given list.");
+    }
+
+    Product newProduct = new Product
+    {
+        Name = newProductName,
+        Price = newProductPice,
+        ProductTypeId = AddedProductType,
+    };
+
+    products.Add(newProduct);
+
+    Console.WriteLine($"You've successfully added {newProduct.Name}");
 }
 
 void UpdateProduct(List<Product> products, List<ProductType> productTypes)

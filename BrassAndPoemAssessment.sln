@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrassAndPoem", "BrassAndPoem\BrassAndPoem.csproj", "{F59366CC-C4B1-4E29-81C5-884A79270D95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrassAndPoems.Tests", "BrassAndPoems.Tests\BrassAndPoems.Tests.csproj", "{963908BD-C280-4E8C-8710-CB59FF97CC3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +17,15 @@ Global
 		{F59366CC-C4B1-4E29-81C5-884A79270D95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F59366CC-C4B1-4E29-81C5-884A79270D95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F59366CC-C4B1-4E29-81C5-884A79270D95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{963908BD-C280-4E8C-8710-CB59FF97CC3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{963908BD-C280-4E8C-8710-CB59FF97CC3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{963908BD-C280-4E8C-8710-CB59FF97CC3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{963908BD-C280-4E8C-8710-CB59FF97CC3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B6A9C6B3-2303-42D2-83B3-4D67FEDF4AD1}
 	EndGlobalSection
 EndGlobal
