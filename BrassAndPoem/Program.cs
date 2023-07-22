@@ -1,6 +1,7 @@
 ﻿
 //create a "products" variable here to include at least five Product instances. Give them appropriate ProductTypeIds.
 
+using System.ComponentModel.Design;
 using System.Net.WebSockets;
 using System.Threading.Channels;
 
@@ -169,6 +170,7 @@ void AddProduct(List<Product> products, List<ProductType> productTypes)
     Console.WriteLine("Add a new product");
     Console.WriteLine("Enter the name of the product:");
     string? newProductName = Console.ReadLine();
+
     if (string.IsNullOrEmpty(newProductName))
     {
         Console.WriteLine("This field is required. Please enter a name.");
@@ -210,43 +212,53 @@ void AddProduct(List<Product> products, List<ProductType> productTypes)
 
 void UpdateProduct(List<Product> products, List<ProductType> productTypes)
 {
-    Console.WriteLine("Please choose which product you would like to update.");
+    Console.WriteLine("Please choose which product you would like to update by the number listed.");
     DisplayAllProducts(products, productTypes);
 
     string userInput = Console.ReadLine();
 
     if (Int32.TryParse(userInput, out int index))
     {
-        Product product = products[index - 1];
-        Console.WriteLine("Enter the new name or press enter to keep original name.");
-        string updatedName = Console.ReadLine();
-
-        if (!string.IsNullOrWhiteSpace(updatedName))
+        if (index >= 1 && index <= products.Count)
         {
-            product.Name = updatedName;
+            Product product = products[index - 1];
+            Console.WriteLine("Enter the new name or press enter to keep original name.");
+            string updatedName = Console.ReadLine();
+
+            if (!string.IsNullOrWhiteSpace(updatedName))
+            {
+                product.Name = updatedName;
+            }
+            else
+            {
+                Console.WriteLine();
+
+                Console.WriteLine("Enter the new price or press enter to keep original price.");
+                string updatedPrice = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(updatedPrice) && decimal.TryParse(updatedPrice, out decimal price))
+                {
+                    product.Price = price;
+                }
+                Console.WriteLine();
+
+                Console.WriteLine("Select the updated product type or press enter to keep original product type.");
+                for (int i = 0; i < productTypes.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. Product Id {productTypes[i].Id}: {productTypes[i].Title}");
+                }
+                Console.WriteLine();
+
+                string updatedProductType = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(updatedProductType) && int.TryParse(updatedProductType, out int productType))
+                {
+                    product.ProductTypeId = productType;
+                }
+            }
         }
-        Console.WriteLine();
-
-        Console.WriteLine("Enter the new price or press enter to keep original price.");
-        string updatedPrice = Console.ReadLine();
-
-        if (!string.IsNullOrWhiteSpace(updatedPrice) && decimal.TryParse(updatedPrice, out decimal price))
+        else
         {
-            product.Price = price;
-        }
-        Console.WriteLine();
-
-        Console.WriteLine("Select the updated product type or press enter to keep original product type.");
-        for (int i = 0; i < productTypes.Count; i++)
-        {
-            Console.WriteLine($"{i + 1}. Product Id {productTypes[i].Id}: {productTypes[i].Title}");
-        }
-        Console.WriteLine();
-
-        string updatedProductType = Console.ReadLine();
-        if (!string.IsNullOrWhiteSpace(updatedProductType) && int.TryParse(updatedProductType, out int productType))
-        {
-            product.ProductTypeId = productType;
+            Console.WriteLine("Not a valid input.Please try again.");
         }
     }
 }
